@@ -12,8 +12,8 @@ void merge(int v1, int v2){
     int p1 = find(v1);
     int p2 = find(v2);
     if(p1 == p2) return;
-    if(v1 < v2) disjoint[v2] = v1;
-    else disjoint[v1] = v2;
+    // union 
+    disjoint[p2] = p1;
 }
 
 int main(void){
