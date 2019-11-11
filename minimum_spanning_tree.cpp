@@ -1,4 +1,7 @@
-// https://www.acmicpc.net/problem/1922
+/*
+    https://www.acmicpc.net/problem/1922
+    Kruskal Algorithm
+*/
 #include <iostream>
 #include <algorithm>
 
