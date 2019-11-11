@@ -9,7 +9,7 @@ std::priority_queue<pii, std::vector<pii>, std::less<pii>> max_pii_pq;
 std::priority_queue<pii, std::vector<pii>, std::greater<pii>> min_pii_pq;
 
 int main(void){
-    // time complexibility of method 'push' : O(logN)
+    // time complexity of method 'push' : O(logN)
     pq.push(5);
     pq.push(1);
     pq.push(9);
