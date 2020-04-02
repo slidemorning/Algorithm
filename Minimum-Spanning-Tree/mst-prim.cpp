@@ -39,6 +39,7 @@ int main(void){
     for(int i=0; i<num_edge; i++){
         int from, to, cost;
         cin >> from >> to >> cost;
+        // non-directional edge ...
         adj[from].push_back(make_pair(cost, to));
         adj[to].push_back(make_pair(cost, from));
     }

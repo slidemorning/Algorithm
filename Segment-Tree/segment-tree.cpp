@@ -16,8 +16,8 @@ int tree[4*LENGTH];
 
 // build sgement tree
 // index of root node is 0
-// left child -> index * 2 + 1
-// right child -> index * 2 + 2
+// left child -> index * 2 + 1 (<- Complete Binary Tree)
+// right child -> index * 2 + 2 (<- Complete Binary Tree)
 int init(int index, int start, int end){
     if(start == end){
         tree[index] = a[start];
@@ -32,6 +32,7 @@ int init(int index, int start, int end){
 // 구하려는 합의 범위 (구간합의 범위) : [left, right]
 // 현재 segment tree 의 index : index
 int sum(int index, int start, int end, int left, int right){
+    
     if(left > end || right < start) return 0;
 
     //     [left         ~         right]
