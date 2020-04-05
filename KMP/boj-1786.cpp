@@ -1,4 +1,4 @@
-// https://www.acmicpc.net/problem/1786
+// https://www.acmicpc.net/problem/1786 찾기
 #include <iostream>
 #include <vector>
 
