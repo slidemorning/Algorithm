@@ -8,7 +8,7 @@ using namespace std;
 #define NORTH 3
 #define EMPTY 0
 #define WALL 6
-#define WATCHED -1
+#define WATCHED 9
 
 struct Cam{
     int row;
@@ -29,26 +29,22 @@ void watchCam(const int r, const int c, vector<vector<int>>& m, const int dir){
     if(dir == EAST){
         for(int j=c+1; j<mapCol; j++){
             if(m[r][j] == WALL) break;
-            if(m[r][j] != EMPTY) continue;
-            m[r][j] = WATCHED;
+            if(m[r][j] == EMPTY) m[r][j] = WATCHED;
         }
     }else if(dir == SOUTH){
         for(int i=r+1; i<mapRow; i++){
             if(m[i][c] == WALL) break;
-            if(m[i][c] != EMPTY) continue;
-            m[i][c] = WATCHED;
+            if(m[i][c] == EMPTY) m[i][c] = WATCHED;
         }
     }else if(dir == WEST){
         for(int j=c-1; j>=0; j--){
             if(m[r][j] == WALL) break;
-            if(m[r][j] != EMPTY) continue;
-            m[r][j] = WATCHED;
+            if(m[r][j] == EMPTY) m[r][j] = WATCHED;
         }
     }else{
         for(int i=r-1; i>=0; i--){
             if(m[i][c] == WALL) break;
-            if(m[i][c] != EMPTY) continue;
-            m[i][c] = WATCHED;
+            if(m[i][c] == EMPTY) m[i][c] = WATCHED;
         }
     }
 }
@@ -113,16 +109,28 @@ void watchMap(const struct Cam c, vector<vector<int>>& m){
 int getBlindSpot(){
     int ret = 0;
     vector<vector<int>> copyMap(mapRow, vector<int>(mapCol, 0));
+    for(int i=0; i<mapRow; i++){
+        for(int j=0; j<mapCol; j++){
+            copyMap[i][j] = map[i][j];
+        }
+    }
     for(int i=0; i<cam.size(); i++){
         watchMap(cam[i], copyMap);
     }
     for(int i=0; i<mapRow; i++){
         for(int j=0; j<mapCol; j++){
-            if(map[i][j] == EMPTY){
+            if(copyMap[i][j] == EMPTY){
                 ret += 1;
             }
         }
     }
+
+    /*for(int i=0; i<mapRow; i++){
+        for(int j=0; j<mapCol; j++){
+            printf("%d ", copyMap[i][j]);
+        }
+        printf("\n");
+    }*/
     return ret;
 }
 
@@ -135,7 +143,15 @@ void setCamDirection(){
 void recur(){
     if(watchCase.size() == cam.size()){
         setCamDirection();
-        ans = min(ans, getBlindSpot());
+        /*printf("watch direction case: ");
+        for(int i=0; i<watchCase.size(); i++){
+            printf("%d ", watchCase[i]);
+        }
+        printf("\n");*/
+        int bs = getBlindSpot();
+        ans = min(ans, bs);
+        //printf("blind spot : %d\n", bs);
+        return;
     }
     for(int dir=0; dir<4; dir++){
         watchCase.push_back(dir);
