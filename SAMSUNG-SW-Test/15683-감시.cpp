@@ -18,8 +18,6 @@ struct Cam{
 };
 vector<struct Cam> cam;
 vector<int> watchCase;
-const int dr[4] = {0, 1, 0, -1};
-const int dc[4] = {1, 0, -1, 0};
 int map[8][8];
 int mapRow;
 int mapCol;
@@ -124,13 +122,6 @@ int getBlindSpot(){
             }
         }
     }
-
-    /*for(int i=0; i<mapRow; i++){
-        for(int j=0; j<mapCol; j++){
-            printf("%d ", copyMap[i][j]);
-        }
-        printf("\n");
-    }*/
     return ret;
 }
 
@@ -143,14 +134,7 @@ void setCamDirection(){
 void recur(){
     if(watchCase.size() == cam.size()){
         setCamDirection();
-        /*printf("watch direction case: ");
-        for(int i=0; i<watchCase.size(); i++){
-            printf("%d ", watchCase[i]);
-        }
-        printf("\n");*/
-        int bs = getBlindSpot();
-        ans = min(ans, bs);
-        //printf("blind spot : %d\n", bs);
+        ans = min(ans, getBlindSpot());
         return;
     }
     for(int dir=0; dir<4; dir++){
